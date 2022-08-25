@@ -1,5 +1,3 @@
-Quiz documentation / [Exports](modules.md)
-
 # Use Python
 
 [![pub package](https://img.shields.io/npm/v/usepython)](https://www.npmjs.com/package/usepython)
