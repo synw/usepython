@@ -1,0 +1,41 @@
+{
+  "name": "usepython",
+  "version": "0.0.3",
+  "description": "A Python scripts runner composable",
+  "repository": "https://github.com/synw/usepython",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -cw"
+  },
+  "dependencies": {
+    "highlight.js": "^11.6.0",
+    "nanostores": "^0.6.0",
+    "pyodide": "^0.21.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^13.1.3",
+    "@types/node": "^16.10.2",
+    "rollup": "^2.78.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.33.0",
+    "rollup-plugin-web-worker-loader": "^1.6.1",
+    "tslib": "^2.3.1",
+    "typescript": "^4.6.3"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/py.min.js",
+  "module": "./dist/py.esm.js",
+  "types": "./dist/main.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/py.esm.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "license": "MIT"
+}
