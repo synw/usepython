@@ -24,4 +24,4 @@ const isPyExecuting = computed(pyExecState, all => {
 const isPyReady = computed(isPyReadyState, all => {
   return all === 1
 })
-export { pyLog, PyLog, PyInstallLog, isPyExecuting, pyExecState, pyInstallLog, isPyReadyState, isPyReady }
+export { pyLog, isPyExecuting, pyExecState, pyInstallLog, isPyReadyState, isPyReady }

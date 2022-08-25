@@ -63,6 +63,7 @@ const usePython = () => {
     return buf.join("\n")
   }
 
+  /** Load the Python runtime */
   async function load(pyoPackages: Array<string> = [], packages: Array<string> = [], initCode = "", transformCode = ""): Promise<{ results: any, error: any }> {
     let res: { results: any; error: any };
     try {
@@ -82,6 +83,11 @@ const usePython = () => {
     return res
   }
 
+  /** Run a Python script
+   * @param id the script id
+   * @param script the Python code to run
+   * @param context some context data to pass to the runtime
+   */
   async function run(id: string, script: string, context: Record<string, any> = {}): Promise<{ results: any, error: any }> {
     if (pyExecState.get() === 1) {
       throw new Error("Only one python script can run at the time")
@@ -108,9 +114,13 @@ const usePython = () => {
   return {
     load,
     run,
+    /** The install log store */
     installLog: pyInstallLog,
+    /** The runtime log store */
     log: pyLog,
+    /** The execution state atom */
     isExecuting: isPyExecuting,
+    /** The ready state atom */
     isReady: isPyReady,
   }
 }

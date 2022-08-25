@@ -41,5 +41,12 @@
     "dist",
     "py.ts",
     "store.ts",
-  ]
+  ],
+  "typedocOptions": {
+    "name": "Quiz documentation",
+    "entryPoints": [
+      "src/main.ts"
+    ],
+    "out": "doc",
+  }
 }
