@@ -7,7 +7,7 @@
     &nbsp;Execute
   </button>
   <div class="pt-3 pl-8">
-    <div class="pt-3 pl-8" v-if="log.stdOut.length > 0">
+    <div class="pt-3 pl-8">
       <pre v-for="row in log.stdOut" v-html="row"></pre>
     </div>
   </div>
@@ -21,9 +21,9 @@
 
 <script setup lang="ts">
 import 'highlight.js';
-import { usePython } from "usepython";
+import { usePython, PyLog } from "usepython";
 import CodeEditor from 'simple-code-editor';
-import { computed, onBeforeMount, ref } from "vue";
+import { computed, reactive, ref } from "vue";
 import { useStore } from '@nanostores/vue';
 
 const props = defineProps({
@@ -45,11 +45,21 @@ const parsedCode = ref(props.code);
 const outputHtml = ref<string | null>(null);
 const isExecuting = useStore(props.py.isExecuting);
 const isReady = useStore(props.py.isReady);
-const log = useStore(props.py.log);
+const log = reactive<PyLog>({
+  id: "",
+  stdOut: [],
+  stdErr: [],
+  exception: ""
+});
 
-async function init() {
-  await props.py.load();
-}
+props.py.log.listen((val) => {
+  if (val.id == props.id) {
+    log.id = val.id;
+    log.stdOut = val.stdOut;
+    log.stdErr = val.stdErr;
+    log.exception = val.exception;
+  }
+})
 
 async function runTheCode() {
   outputHtml.value = "";
@@ -73,8 +83,6 @@ async function runTheCode() {
 const canRun = computed<Boolean>(() => {
   return isReady.value == true && isExecuting.value == false
 });
-
-onBeforeMount(() => init())
 </script>
 
 <style lang="sass" scoped>
