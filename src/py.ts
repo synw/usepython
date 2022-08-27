@@ -88,14 +88,14 @@ const usePython = () => {
    * @param script the Python code to run
    * @param context some context data to pass to the runtime
    */
-  async function run(id: string, script: string, context: Record<string, any> = {}): Promise<{ results: any, error: any }> {
+  async function run(script: string, id?: string, context: Record<string, any> = {}): Promise<{ results: any, error: any }> {
     if (pyExecState.get() === 1) {
       throw new Error("Only one python script can run at the time")
     }
     pyExecState.set(1);
     // reset logger
     pyLog.set({
-      id: id,
+      id: id ?? (+ new Date()).toString(),
       stdOut: [],
       stdErr: [],
       exception: "",

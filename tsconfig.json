@@ -43,7 +43,7 @@
     "store.ts",
   ],
   "typedocOptions": {
-    "name": "Quiz documentation",
+    "name": "Documentation",
     "entryPoints": [
       "src/main.ts"
     ],
