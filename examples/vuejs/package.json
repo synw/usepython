@@ -11,7 +11,7 @@
     "@nanostores/vue": "^0.6.0",
     "highlight.js": "^11.4.0",
     "simple-code-editor": "^1.2.2",
-    "usepython": "0.0.3",
+    "usepython": "0.0.8",
     "vue": "^3.2.31"
   },
   "devDependencies": {

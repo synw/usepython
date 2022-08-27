@@ -10,11 +10,12 @@
       window.process = {env: {NODE_ENV: 'production'}};
     </script>
     <script type="module">
-      import { usePython } from "https://unpkg.com/usepython@0.0.3/dist/py.esm.js";
+      import { usePython } from "https://unpkg.com/usepython@0.0.8/dist/py.esm.js";
       const py = usePython();
       const unbindInstallLog = py.installLog.listen((val) => {
         console.log(`Installing Python, stage ${val.stage}: ${val.msg}`)
       })
+      console.log("Loading Python");
       await py.load();
       unbindInstallLog();
       console.log("Python is ready");
@@ -22,7 +23,7 @@
         console.log("LOG", val.stdOut)
       });
       const script = `print('ok from python')`;
-      const { result, error } = await py.run("1", script);
+      const { result, error } = await py.run(script);
       console.log("Error", error);
       console.log("Result", result);
     </script>

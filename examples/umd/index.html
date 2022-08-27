@@ -9,7 +9,7 @@
     <script>
       window.process = {env: {NODE_ENV: 'production'}};
     </script>
-    <script src="https://unpkg.com/usepython@0.0.3/dist/py.min.js"></script>
+    <script src="https://unpkg.com/usepython@0.0.8/dist/py.min.js"></script>
     <script>
       const py = $py.usePython();
       const unbindInstallLog = py.installLog.listen((val) => {
@@ -22,7 +22,7 @@
         unbindInstallLog();
         console.log("Python is ready");
         const script = `print('ok from python')`;
-        py.run("1", script).then((res) => {
+        py.run(script).then((res) => {
           console.log("Error", res.error);
           console.log("Result", res.result);
         });

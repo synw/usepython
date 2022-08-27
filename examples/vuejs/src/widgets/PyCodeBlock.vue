@@ -56,8 +56,8 @@ async function runTheCode() {
   if (!canRun) {
     return
   }
-  console.log("Run", typeof (parsedCode.value), parsedCode.value);
-  const { results, error } = await props.py.run(props.id, parsedCode.value);
+  //console.log("Run", typeof (parsedCode.value), parsedCode.value);
+  const { results, error } = await props.py.run(parsedCode.value, props.id);
   console.log("PYRES", results)
   console.log("PYERR", error)
   if (results) {
