@@ -1,4 +1,4 @@
-Quiz documentation / [Exports](modules.md)
+Documentation / [Exports](modules.md)
 
 # Use Python
 
@@ -62,6 +62,8 @@ await py.load();
 unbindInstallLog();
 ```
 
+The install log object is a [nanostore](https://github.com/nanostores/nanostores#maps)
+
 ### Load libraries
 
 It is possible to install some Python packages: either [packages built for Pyodide](https://pyodide.org/en/stable/usage/packages-in-pyodide.html#packages-in-pyodide), standard pip packages that will be installed with Micropip, or custom wheels 
@@ -98,6 +100,27 @@ py.log.listen((val) => {
   // val.stdErr is also available
 });
 await py.run("script2", script);
+```
+
+The log object is a [nanostore](https://github.com/nanostores/nanostores#maps)
+
+### State
+
+[Atom stores](https://github.com/nanostores/nanostores#atoms) are available to listen to
+the ready state and execution state of Python. Example:
+
+```ts
+py.isReady.listen((v) => console.log("Ready state:", v));
+py.isExecuting.listen((v) => console.log("Execution state:", v));
+```
+
+Vuejs example:
+
+```ts
+import { useStore } from '@nanostores/vue';
+
+const isExecuting: Readonly<Ref<boolean>> = useStore(py.isExecuting);
+const isReady: Readonly<Ref<boolean>> = useStore(py.isReady);
 ```
 
 ## Examples

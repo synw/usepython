@@ -1,6 +1,6 @@
-[Quiz documentation](README.md) / Exports
+[Documentation](README.md) / Exports
 
-# Quiz documentation
+# Documentation
 
 ## Table of contents
 
@@ -32,8 +32,8 @@ The main composable
 | `isReady` | `ReadableAtom`<`boolean`\> | The ready state atom |
 | `load` | (`pyoPackages`: `string`[], `packages`: `string`[], `initCode`: `string`, `transformCode`: `string`) => `Promise`<{ `error`: `any` ; `results`: `any`  }\> | Load the Python runtime |
 | `log` | `MapStore`<[`PyLog`](interfaces/PyLog.md)\> | The runtime log store |
-| `run` | (`id`: `string`, `script`: `string`, `context`: `Record`<`string`, `any`\>) => `Promise`<{ `error`: `any` ; `results`: `any`  }\> | Run a Python script |
+| `run` | (`script`: `string`, `id?`: `string`, `context`: `Record`<`string`, `any`\>) => `Promise`<{ `error`: `any` ; `results`: `any`  }\> | Run a Python script |
 
 #### Defined in
 
-[py.ts:5](https://github.com/synw/usepython/blob/11c2783/src/py.ts#L5)
+[py.ts:5](https://github.com/synw/usepython/blob/1a75566/src/py.ts#L5)

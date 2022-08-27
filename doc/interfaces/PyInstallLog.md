@@ -1,4 +1,4 @@
-[Quiz documentation](../README.md) / [Exports](../modules.md) / PyInstallLog
+[Documentation](../README.md) / [Exports](../modules.md) / PyInstallLog
 
 # Interface: PyInstallLog
 
@@ -17,7 +17,7 @@
 
 #### Defined in
 
-[interfaces.ts:10](https://github.com/synw/usepython/blob/11c2783/src/interfaces.ts#L10)
+[interfaces.ts:10](https://github.com/synw/usepython/blob/1a75566/src/interfaces.ts#L10)
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 #### Defined in
 
-[interfaces.ts:9](https://github.com/synw/usepython/blob/11c2783/src/interfaces.ts#L9)
+[interfaces.ts:9](https://github.com/synw/usepython/blob/1a75566/src/interfaces.ts#L9)
