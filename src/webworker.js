@@ -46,7 +46,7 @@ async function loadPyodideAndPackages(id, pyoPackages, packages, initCode, trans
   `);
   installLog(id, 4, `Initializing environment`);
   self.parray = undefined;
-  const src = `from pyodide import eval_code_async
+  const src = `from pyodide.code import eval_code_async
 from pyodide.ffi import to_js
 async def pyeval(code, ns):
   result = await eval_code_async(code, ns)

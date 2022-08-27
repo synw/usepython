@@ -67,7 +67,7 @@ const usePython = () => {
   async function load(pyoPackages: Array<string> = [], packages: Array<string> = [], initCode = "", transformCode = ""): Promise<{ results: any, error: any }> {
     let res: { results: any; error: any };
     try {
-      res = await run("_pyinstaller", "", {
+      res = await run("", "_pyinstaller", {
         pyoPackages: pyoPackages,
         packages: packages,
         initCode: initCode,
@@ -94,8 +94,9 @@ const usePython = () => {
     }
     pyExecState.set(1);
     // reset logger
+    const _id = id ?? (+ new Date()).toString();
     pyLog.set({
-      id: id ?? (+ new Date()).toString(),
+      id: _id,
       stdOut: [],
       stdErr: [],
       exception: "",
@@ -104,9 +105,9 @@ const usePython = () => {
     return new Promise((onSuccess) => {
       _callback = onSuccess;
       _pyodideWorker.postMessage({
-        ...context,
+        id: _id,
         python: script,
-        id: id,
+        ...context,
       });
     });
   }
