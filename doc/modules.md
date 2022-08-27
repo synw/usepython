@@ -36,4 +36,4 @@ The main composable
 
 #### Defined in
 
-[py.ts:5](https://github.com/synw/usepython/blob/1a75566/src/py.ts#L5)
+[py.ts:5](https://github.com/synw/usepython/blob/42a60cb/src/py.ts#L5)

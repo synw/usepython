@@ -82,7 +82,7 @@ Run some Python code:
 const script = `a=1
 b=2
 a+b`
-const { result, error } = await py.run("script1", script);
+const { result, error } = await py.run(script);
 ```
 
 The result is the last line of the script, just like a return value
@@ -94,12 +94,12 @@ See the [documentation](doc/modules.md)
 Listen to the Python stdout output:
 
 ```ts
-const script = `print('ok from python')`;
 py.log.listen((val) => {
   console.log("LOG", val.stdOut)
   // val.stdErr is also available
 });
-await py.run("script2", script);
+const script = `print('ok from python')`;
+await py.run(script);
 ```
 
 The log object is a [nanostore](https://github.com/nanostores/nanostores#maps)
