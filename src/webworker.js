@@ -1,6 +1,8 @@
-importScripts("https://cdn.jsdelivr.net/pyodide/v0.21.0/full/pyodide.js");
+importScripts("https://cdn.jsdelivr.net/pyodide/v0.22.1/full/pyodide.js");
 
-let isPyLoaded = false;
+var isPyLoaded = false;
+var namespaces = {};
+//var self.globInit = {};
 
 function stdout(msg) {
   self.postMessage({ type: "stdout", msg: msg, id: null })
@@ -61,39 +63,51 @@ async def pyeval(code, ns):
   isPyLoaded = true;
 }
 
-async function runScript(python, id) {
+async function runScript(python, id, globs) {
   try {
+    //console.log("GLOBS", globs);
     //console.log("Load imports")
     await self.pyodide.loadPackagesFromImports(python);
     //console.log("Run py async")
     //let results = await self.pyodide.runPythonAsync(python);
-    let results = await pyodide.globals.get("pyeval")(python, pyodide.globals)
-    //console.log("End")
+    let results = await pyodide.globals.get("pyeval")(python, globs)
+    //console.log("End", results, _globals)
     end(id, results)
   } catch (error) {
-    console.log("PY RUN ERR", error)
+    //console.log("PY RUN ERR", error)
     err(id, error.message)
   }
 }
 
-function flushMemory() {
-  // destroy all user defined variables in the interpreter
-  let dict = pyodide.pyimport("dict");
-  pyodide.runPython(code, dict());
-}
-
 self.onmessage = async (event) => {
-  const { id, python, ...context } = event.data;
-  if (id != "_pyinstaller") {
+  const { id, namespace, python, ...context } = event.data;
+  if (id == "_flushns") {
+    console.log("restore glob", JSON.stringify(pyodide.globals.get("dict")(), null, "  "));
+    namespaces[namespace] = pyodide.globals.get("dict")();
+  }
+  // run
+  else if (id != "_pyinstaller") {
     // The worker copies the context in its own "memory" (an object mapping name to values)
     for (const key of Object.keys(context)) {
       self[key] = context[key];
     }
     if (!isPyLoaded) {
-      //await loadPyodideAndPackages(id, []);
       throw new Error("Python is not loaded")
     }
-    await runScript(python, id)
+    let _globs = pyodide.globals;
+    // check namespace
+    if (namespace) {
+      if (namespace in namespaces) {
+        _globs = namespaces[namespace]
+      } else {
+        _globs = pyodide.globals.get("dict")();
+        namespaces[namespace] = _globs
+      }
+      //console.log("Running script in ns", namespace, _globs)
+    } /*else {
+      console.log("Running script in main ns", _globs)
+    }*/
+    await runScript(python, id, _globs)
   } else {
     await loadPyodideAndPackages(id, context.pyoPackages, context.packages, context.initCode, context.transformCode);
     end(id)

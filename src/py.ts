@@ -20,6 +20,7 @@ const usePython = () => {
         pyExecState.set(0);
         break;
       case "err":
+        _callback({ results: null, error: data.msg })
         _callback = (v) => null
         pyExecState.set(0);
         pyLog.setKey("exception", data.msg)
@@ -67,7 +68,7 @@ const usePython = () => {
   async function load(pyoPackages: Array<string> = [], packages: Array<string> = [], initCode = "", transformCode = ""): Promise<{ results: any, error: any }> {
     let res: { results: any; error: any };
     try {
-      res = await run("", "_pyinstaller", {
+      res = await run("", null, "_pyinstaller", {
         pyoPackages: pyoPackages,
         packages: packages,
         initCode: initCode,
@@ -88,7 +89,12 @@ const usePython = () => {
    * @param script the Python code to run
    * @param context some context data to pass to the runtime
    */
-  async function run(script: string, id?: string, context: Record<string, any> = {}): Promise<{ results: any, error: any }> {
+  async function run(
+    script: string,
+    namespace: string | null = null,
+    id: string | null = null,
+    context: Record<string, any> = {}
+  ): Promise<{ results: any, error: any }> {
     if (pyExecState.get() === 1) {
       throw new Error("Only one python script can run at the time")
     }
@@ -106,8 +112,20 @@ const usePython = () => {
       _callback = onSuccess;
       _pyodideWorker.postMessage({
         id: _id,
+        namespace: namespace,
         python: script,
         ...context,
+      });
+    });
+  }
+
+  /** Clear the python memory */
+  async function clear(namespace: string): Promise<{ results: any, error: any }> {
+    return new Promise((onSuccess) => {
+      _callback = onSuccess;
+      _pyodideWorker.postMessage({
+        id: "_flushns",
+        namespace: namespace,
       });
     });
   }
@@ -115,6 +133,7 @@ const usePython = () => {
   return {
     load,
     run,
+    clear,
     /** The install log store */
     installLog: pyInstallLog,
     /** The runtime log store */
