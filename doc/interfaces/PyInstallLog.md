@@ -17,7 +17,7 @@
 
 #### Defined in
 
-[interfaces.ts:10](https://github.com/synw/usepython/blob/42a60cb/src/interfaces.ts#L10)
+[interfaces.ts:10](https://github.com/synw/usepython/blob/244ad73/src/interfaces.ts#L10)
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 #### Defined in
 
-[interfaces.ts:9](https://github.com/synw/usepython/blob/42a60cb/src/interfaces.ts#L9)
+[interfaces.ts:9](https://github.com/synw/usepython/blob/244ad73/src/interfaces.ts#L9)

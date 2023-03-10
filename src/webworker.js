@@ -48,12 +48,16 @@ async function loadPyodideAndPackages(id, pyoPackages, packages, initCode, trans
   `);
   installLog(id, 4, `Initializing environment`);
   self.parray = undefined;
-  const src = `from pyodide.code import eval_code_async
+  const src = `from pyodide.code import eval_code_async, eval_code
 from pyodide.ffi import to_js
-async def pyeval(code, ns):
-  result = await eval_code_async(code, ns)
+async def async_pyeval(code, ns):
+  _result_ = await eval_code_async(code, ns)
   ${transformCode}
-  return to_js(result)`
+  return to_js(_result_)
+def pyeval(code, ns):
+  _result_ = eval_code(code, ns)
+  ${transformCode}
+  return to_js(_result_)`
   //console.log("SRC EXEC", src)
   await pyodide.runPythonAsync(src);
   if (initCode.length > 0) {
@@ -63,14 +67,14 @@ async def pyeval(code, ns):
   isPyLoaded = true;
 }
 
-async function runScript(python, id, globs) {
+async function runScript(python, id, globs, isAsync) {
   try {
     //console.log("GLOBS", globs);
     //console.log("Load imports")
     await self.pyodide.loadPackagesFromImports(python);
     //console.log("Run py async")
     //let results = await self.pyodide.runPythonAsync(python);
-    let results = await pyodide.globals.get("pyeval")(python, globs)
+    let results = await pyodide.globals.get(isAsync ? "async_pyeval" : "pyeval")(python, globs)
     //console.log("End", results, _globals)
     end(id, results)
   } catch (error) {
@@ -80,9 +84,8 @@ async function runScript(python, id, globs) {
 }
 
 self.onmessage = async (event) => {
-  const { id, namespace, python, ...context } = event.data;
+  const { id, namespace, python, isAsync, ...context } = event.data;
   if (id == "_flushns") {
-    console.log("restore glob", JSON.stringify(pyodide.globals.get("dict")(), null, "  "));
     namespaces[namespace] = pyodide.globals.get("dict")();
   }
   // run
@@ -107,7 +110,11 @@ self.onmessage = async (event) => {
     } /*else {
       console.log("Running script in main ns", _globs)
     }*/
-    await runScript(python, id, _globs)
+    if (isAsync) {
+      await runScript(python, id, _globs, true)
+    } else {
+      await runScript(python, id, _globs, false)
+    }
   } else {
     await loadPyodideAndPackages(id, context.pyoPackages, context.packages, context.initCode, context.transformCode);
     end(id)

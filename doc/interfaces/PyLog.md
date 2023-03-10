@@ -19,7 +19,7 @@
 
 #### Defined in
 
-[interfaces.ts:5](https://github.com/synw/usepython/blob/42a60cb/src/interfaces.ts#L5)
+[interfaces.ts:5](https://github.com/synw/usepython/blob/244ad73/src/interfaces.ts#L5)
 
 ___
 
@@ -29,7 +29,7 @@ ___
 
 #### Defined in
 
-[interfaces.ts:2](https://github.com/synw/usepython/blob/42a60cb/src/interfaces.ts#L2)
+[interfaces.ts:2](https://github.com/synw/usepython/blob/244ad73/src/interfaces.ts#L2)
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 #### Defined in
 
-[interfaces.ts:4](https://github.com/synw/usepython/blob/42a60cb/src/interfaces.ts#L4)
+[interfaces.ts:4](https://github.com/synw/usepython/blob/244ad73/src/interfaces.ts#L4)
 
 ___
 
@@ -49,4 +49,4 @@ ___
 
 #### Defined in
 
-[interfaces.ts:3](https://github.com/synw/usepython/blob/42a60cb/src/interfaces.ts#L3)
+[interfaces.ts:3](https://github.com/synw/usepython/blob/244ad73/src/interfaces.ts#L3)

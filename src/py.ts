@@ -64,11 +64,18 @@ const usePython = () => {
     return buf.join("\n")
   }
 
-  /** Load the Python runtime */
-  async function load(pyoPackages: Array<string> = [], packages: Array<string> = [], initCode = "", transformCode = ""): Promise<{ results: any, error: any }> {
+  /** Load the Python runtime 
+   * @param pyoPackages the list of Pyodide packages to install
+   * @param packages the list of Pip packages to install
+   * @param initCode the code to run before runtime initialization
+   * @param transformCode the code to run after every script
+  */
+  async function load(
+    pyoPackages: Array<string> = [], packages: Array<string> = [], initCode = "", transformCode = ""
+  ): Promise<{ results: any, error: any }> {
     let res: { results: any; error: any };
     try {
-      res = await run("", null, "_pyinstaller", {
+      res = await run("", undefined, "_pyinstaller", {
         pyoPackages: pyoPackages,
         packages: packages,
         initCode: initCode,
@@ -84,15 +91,11 @@ const usePython = () => {
     return res
   }
 
-  /** Run a Python script
-   * @param id the script id
-   * @param script the Python code to run
-   * @param context some context data to pass to the runtime
-   */
-  async function run(
+  async function _run(
     script: string,
-    namespace: string | null = null,
-    id: string | null = null,
+    isAsync: boolean,
+    namespace?: string,
+    id?: string,
     context: Record<string, any> = {}
   ): Promise<{ results: any, error: any }> {
     if (pyExecState.get() === 1) {
@@ -114,15 +117,63 @@ const usePython = () => {
         id: _id,
         namespace: namespace,
         python: script,
+        isAsync: isAsync,
         ...context,
       });
     });
   }
 
-  /** Clear the python memory */
+  /** Run a Python script
+   * @param script the Python code to run
+   * @param namespace the namemespace where the code will run
+   * @param id the script id
+   * @param context some context data to pass to the runtime
+   */
+  async function run(
+    script: string,
+    namespace?: string,
+    id?: string,
+    context: Record<string, any> = {}
+  ): Promise<{ results: any, error: any }> {
+    return await _run(script, false, namespace, id, context)
+  }
+
+  /** Run an async Python script
+   * @param script the Python code to run
+   * @param namespace the namemespace where the code will run
+   * @param id the script id
+   * @param context some context data to pass to the runtime
+ */
+  async function runAsync(
+    script: string,
+    namespace?: string,
+    id?: string,
+    context: Record<string, any> = {}
+  ): Promise<{ results: any, error: any }> {
+    return await _run(script, true, namespace, id, context)
+  }
+
+  /** Clear the python memory and logs for a namespace
+   * @param namespace the namespace to cleanup
+   */
   async function clear(namespace: string): Promise<{ results: any, error: any }> {
     return new Promise((onSuccess) => {
-      _callback = onSuccess;
+      const _cb: (value: {
+        results: any;
+        error: any;
+      } | PromiseLike<{
+        results: any;
+        error: any;
+      }>) => void = (v) => {
+        pyLog.set({
+          id: "_flushns",
+          stdOut: [],
+          stdErr: [],
+          exception: "",
+        });
+        onSuccess(v)
+      };
+      _callback = _cb;
       _pyodideWorker.postMessage({
         id: "_flushns",
         namespace: namespace,
@@ -133,6 +184,7 @@ const usePython = () => {
   return {
     load,
     run,
+    runAsync,
     clear,
     /** The install log store */
     installLog: pyInstallLog,

@@ -1,6 +1,6 @@
 {
   "name": "usepython",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A Python scripts runner composable",
   "repository": "https://github.com/synw/usepython",
   "scripts": {
@@ -9,19 +9,19 @@
     "docs": "typedoc --entryPointStrategy expand"
   },
   "dependencies": {
-    "nanostores": "^0.6.0",
-    "pyodide": "^0.21.0"
+    "nanostores": "^0.7.4",
+    "pyodide": "^0.22.1"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^13.1.3",
     "@types/node": "^16.10.2",
-    "highlight.js": "^11.6.0",
+    "highlight.js": "^11.7.0",
     "rollup": "^2.78.1",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.33.0",
     "rollup-plugin-web-worker-loader": "^1.6.1",
     "tslib": "^2.3.1",
-    "typedoc": "^0.23.5",
+    "typedoc": "^0.23.6",
     "typedoc-plugin-markdown": "^3.13.2",
     "typedoc-plugin-rename-defaults": "^0.6.1",
     "typescript": "^4.6.3"

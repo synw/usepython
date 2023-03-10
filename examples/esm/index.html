@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Use Python ESM example</title>
   </head>
+
   <body>
     <script>
-      window.process = {env: {NODE_ENV: 'production'}};
+      window.process = { env: { NODE_ENV: 'production' } };
     </script>
     <script type="module">
-      import { usePython } from "https://unpkg.com/usepython@0.0.8/dist/py.esm.js";
+      import { usePython } from "https://unpkg.com/usepython@0.0.10/dist/py.esm.js";
       const py = usePython();
       const unbindInstallLog = py.installLog.listen((val) => {
         console.log(`Installing Python, stage ${val.stage}: ${val.msg}`)
@@ -28,4 +30,5 @@
       console.log("Result", result);
     </script>
   </body>
+
 </html>
