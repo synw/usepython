@@ -61,7 +61,7 @@ def pyeval(code, ns):
   //console.log("SRC EXEC", src)
   await pyodide.runPythonAsync(src);
   if (initCode.length > 0) {
-    await pyodide.runPythonAsync(initCode);
+    await pyodide.runPython(initCode);
   }
   installLog(id, 5, "The python env is loaded")
   isPyLoaded = true;

@@ -4,6 +4,7 @@ import { pyLog, pyExecState, pyInstallLog, isPyExecuting, isPyReadyState, isPyRe
 /** The main composable */
 const usePython = () => {
   const _pyodideWorker = new worker();
+  //const _pyodideWorker = new Worker(new URL('./webworker.js', import.meta.url), { type: 'classic' })
   let _callback: (value: {
     results: any;
     error: any;

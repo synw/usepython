@@ -1,6 +1,6 @@
 {
   "name": "usepython",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "A Python scripts runner composable",
   "repository": "https://github.com/synw/usepython",
   "scripts": {
