@@ -33,12 +33,12 @@ const usePython = () => {
       case "stderr":
         //console.log("STDERR:", data.msg)
         pyLog.get().stdErr.push(data.msg);
-        pyLog.notify();
+        //pyLog.notify();
         break;
       case "stdout":
         //console.log("STDOUT:", data.msg)
         pyLog.get().stdOut.push(data.msg);
-        pyLog.notify();
+        //pyLog.notify();
         //pyLog.setKey("stdOut", [...pyLog.get().stdOut, data.msg])
         break;
       default:
