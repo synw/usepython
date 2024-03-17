@@ -10,6 +10,7 @@ export default [
     input: 'src/py.ts',
     output: [
       {
+        sourcemap: !isProduction,
         file: 'dist/py.min.js',
         format: 'iife',
         name: '$py',
@@ -31,6 +32,7 @@ export default [
     input: 'src/main.ts',
     output: [
       {
+        sourcemap: !isProduction,
         file: 'dist/py.esm.js',
         format: 'es'
       }],
