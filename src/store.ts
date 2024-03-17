@@ -1,5 +1,5 @@
 import { map, atom, computed } from 'nanostores'
-import { PyLog, PyInstallLog } from "./interfaces";
+import { PyLog, PyInstallLog } from "./interfaces.js";
 
 const pyLog = map<PyLog>({
   id: "",

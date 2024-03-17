@@ -1,8 +1,9 @@
 import worker from 'web-worker:./webworker.js';
-import { pyLog, pyExecState, pyInstallLog, isPyExecuting, isPyReadyState, isPyReady } from "./store";
+import { pyLog, pyExecState, pyInstallLog, isPyExecuting, isPyReadyState, isPyReady } from "./store.js";
+import { PyRunner } from './interfaces.js';
 
 /** The main composable */
-const usePython = () => {
+const usePython = (): PyRunner => {
   const _pyodideWorker = new worker();
   //const _pyodideWorker = new Worker(new URL('./webworker.js', import.meta.url), { type: 'classic' })
   let _callback: (value: {

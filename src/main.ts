@@ -1,4 +1,21 @@
-import { usePython } from "./py";
-import { PyLog, PyInstallLog } from "./interfaces";
+import { usePython } from "./py.js";
+import {
+    PyRunner,
+    PyLog,
+    PyInstallLog,
+    PyRunMethod,
+    PyRunAsyncMethod,
+    PyClearMethod,
+    PyLoadMethod,
+} from "./interfaces.js";
 
-export { PyLog, PyInstallLog, usePython }
+export {
+    usePython,
+    PyRunner,
+    PyLog,
+    PyInstallLog,
+    PyRunMethod,
+    PyRunAsyncMethod,
+    PyClearMethod,
+    PyLoadMethod,
+}
