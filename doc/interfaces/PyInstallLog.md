@@ -2,6 +2,8 @@
 
 # Interface: PyInstallLog
 
+Represents a log entry for the installation process of Python packages.
+
 ## Table of contents
 
 ### Properties
@@ -15,9 +17,11 @@
 
 • **msg**: `string`
 
+Message related to the current stage of the installation process.
+
 #### Defined in
 
-[interfaces.ts:10](https://github.com/synw/usepython/blob/244ad73/src/interfaces.ts#L10)
+[interfaces.ts:48](https://github.com/synw/usepython/blob/58a3740/src/interfaces.ts#L48)
 
 ___
 
@@ -25,6 +29,8 @@ ___
 
 • **stage**: `number`
 
+The current stage of the installation process.
+
 #### Defined in
 
-[interfaces.ts:9](https://github.com/synw/usepython/blob/244ad73/src/interfaces.ts#L9)
+[interfaces.ts:42](https://github.com/synw/usepython/blob/58a3740/src/interfaces.ts#L42)

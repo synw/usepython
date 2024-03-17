@@ -2,6 +2,8 @@
 
 # Interface: PyLog
 
+Represents a log entry for a Python execution.
+
 ## Table of contents
 
 ### Properties
@@ -17,9 +19,11 @@
 
 • **exception**: `string`
 
+Exception message, if any occurred during the execution.
+
 #### Defined in
 
-[interfaces.ts:5](https://github.com/synw/usepython/blob/244ad73/src/interfaces.ts#L5)
+[interfaces.ts:30](https://github.com/synw/usepython/blob/58a3740/src/interfaces.ts#L30)
 
 ___
 
@@ -27,9 +31,11 @@ ___
 
 • **id**: `string`
 
+Unique identifier for the log entry.
+
 #### Defined in
 
-[interfaces.ts:2](https://github.com/synw/usepython/blob/244ad73/src/interfaces.ts#L2)
+[interfaces.ts:12](https://github.com/synw/usepython/blob/58a3740/src/interfaces.ts#L12)
 
 ___
 
@@ -37,9 +43,11 @@ ___
 
 • **stdErr**: `string`[]
 
+Array of standard error messages.
+
 #### Defined in
 
-[interfaces.ts:4](https://github.com/synw/usepython/blob/244ad73/src/interfaces.ts#L4)
+[interfaces.ts:24](https://github.com/synw/usepython/blob/58a3740/src/interfaces.ts#L24)
 
 ___
 
@@ -47,6 +55,8 @@ ___
 
 • **stdOut**: `string`[]
 
+Array of standard output messages.
+
 #### Defined in
 
-[interfaces.ts:3](https://github.com/synw/usepython/blob/244ad73/src/interfaces.ts#L3)
+[interfaces.ts:18](https://github.com/synw/usepython/blob/58a3740/src/interfaces.ts#L18)

@@ -76,7 +76,7 @@ await py.load(pyodideLibs, ['altair', wheel, 'vega_datasets'])
 
 ### Run Python code
 
-Run some Python code:
+Run some sync Python code:
 
 ```ts
 const script = `a=1
@@ -88,6 +88,30 @@ const { result, error } = await py.run(script);
 The result is the last line of the script, just like a return value
 
 See the [documentation](doc/modules.md)
+
+To run async code use the `runAsync` function.
+
+#### Namespaces
+
+An optionnal namespace parameter can be used to isolate Python contexts:
+
+```ts
+const { result, error } = await py.run("a=1", "ns1");
+```
+
+The variable defined in the script will be accessible only in the
+same namespace:
+
+```ts
+const { result, error } = await py.run("b=a+1", "ns1");
+```
+
+To flush the context of the namespace and reset all user defined
+variables use the `clear` function:
+
+```ts
+await py.clear("ns1");
+```
 
 ### Listen to stdout
 
