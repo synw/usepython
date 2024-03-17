@@ -4,6 +4,8 @@
 
 A Python scripts runner composable. Run Python scripts in a [Pyodide](https://github.com/pyodide/pyodide) service worker
 
+[Api doc](https://github.com/synw/usepython/tree/main/doc)
+
 ## Install
 
 ### As a package
@@ -150,3 +152,5 @@ const isReady: Readonly<Ref<boolean>> = useStore(py.isReady);
 - [Script src](examples/umd/)
 - [Script module](examples/esm/)
 - [Vuejs](examples/vuejs/)
+
+[Api doc](https://github.com/synw/usepython/tree/main/doc)
