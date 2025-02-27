@@ -1,6 +1,6 @@
 {
   "name": "usepython",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A Python scripts runner composable",
   "repository": "https://github.com/synw/usepython",
   "scripts": {
@@ -9,22 +9,22 @@
     "docs": "typedoc  --plugin typedoc-plugin-markdown --entryPointStrategy expand"
   },
   "dependencies": {
-    "nanostores": "^0.10.0",
-    "pyodide": "^0.25.0"
+    "nanostores": "^0.11.4",
+    "pyodide": "^0.27.3"
   },
   "devDependencies": {
     "@qortal/rollup-plugin-web-worker-loader": "^1.6.5",
-    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^11.1.6",
-    "@types/node": "^20.11.28",
-    "highlight.js": "^11.9.0",
-    "rollup": "^4.13.0",
-    "tslib": "^2.6.2",
-    "typedoc": "^0.25.12",
-    "typedoc-plugin-markdown": "^3.17.1",
-    "typedoc-plugin-rename-defaults": "^0.7.0",
-    "typescript": "^5.4.2"
+    "@rollup/plugin-typescript": "^12.1.2",
+    "@types/node": "^22.13.5",
+    "highlight.js": "^11.11.1",
+    "rollup": "^4.34.8",
+    "tslib": "^2.8.1",
+    "typedoc": "^0.27.9",
+    "typedoc-plugin-markdown": "^4.4.2",
+    "typedoc-plugin-rename-defaults": "^0.7.2",
+    "typescript": "^5.7.3"
   },
   "files": [
     "dist"
