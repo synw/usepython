@@ -12,8 +12,6 @@ A Python scripts runner composable. Run Python scripts in a [Pyodide](https://gi
 
 ```bash
 npm install usepython
-# or
-yarn add usepython
 ```
 
 Then use it:
