@@ -1,6 +1,5 @@
 <template>
-  <code-editor v-model="parsedCode" :languages="[['python', 'Python']]" :display_language="false" :hide_header="true"
-    @keyup.ctrl.enter="runTheCode()" theme="light" width="540px" spellcheck="false">
+  <code-editor :hljs="hljs" :code="code" lang="python">
   </code-editor>
   <button class="mt-3 border btn" :class="canRun ? 'cursor-pointer' : 'cursor-wait'" @click="runTheCode()">
     <i-cil:media-play class="inline-block" :class="!canRun ? 'txt-lighter' : 'txt-success'"></i-cil:media-play>
@@ -21,10 +20,17 @@
 
 <script setup lang="ts">
 import 'highlight.js';
-import { usePython, PyLog } from "usepython";
-import CodeEditor from 'simple-code-editor';
+//import { usePython, PyLog } from "usepython";
+import { usePython, } from "../../../../dist/py.esm.js";
+import { PyLog } from "../../../../dist/main.js";
 import { computed, reactive, ref } from "vue";
 import { useStore } from '@nanostores/vue';
+import { CodeEditor } from "vuecodit";
+import "vuecodit/style.css";
+import "highlight.js/styles/stackoverflow-light.css";
+import hljs from 'highlight.js/lib/core';
+import python from 'highlight.js/lib/languages/python';
+hljs.registerLanguage('python', python);
 
 const props = defineProps({
   id: {
@@ -43,7 +49,9 @@ const props = defineProps({
 
 const parsedCode = ref(props.code);
 const outputHtml = ref<string | null>(null);
+// @ts-ignore
 const isExecuting = useStore(props.py.isExecuting);
+// @ts-ignore
 const isReady = useStore(props.py.isReady);
 const log = reactive<PyLog>({
   id: "",

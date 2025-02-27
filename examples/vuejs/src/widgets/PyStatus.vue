@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { usePython } from "usepython";
+import { usePython } from "../../../../dist/py.esm.js";
 import { useStore } from '@nanostores/vue';
 
 const props = defineProps({

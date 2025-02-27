@@ -3,7 +3,7 @@
 ```bash
 cd examples/esm
 # run
-yarn dev
+npm run dev
 ```
 
 Open localhost:5173
